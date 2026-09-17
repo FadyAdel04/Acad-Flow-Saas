@@ -1,0 +1,8 @@
+{
+  "files": [],
+  "exclude": ["content_download"],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
