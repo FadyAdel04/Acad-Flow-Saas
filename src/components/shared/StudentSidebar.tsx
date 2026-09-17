@@ -5,14 +5,13 @@ import { RiDashboardLine } from 'react-icons/ri';
 import { useAuth } from '../../context/AuthContext';
 import type { Profile } from '../../services/studentService';
 import { usePWAInstall } from '../../hooks/usePWAInstall';
-import LanguageSwitcher from './LanguageSwitcher';
 
 const navLinks = [
-  { to: '/student', label: 'Dashboard', icon: RiDashboardLine },
-  { to: '/student/courses', label: 'My Courses', icon: FiBookOpen },
-  { to: '/student/assignments', label: 'Assignments', icon: FiFileText },
-  { to: '/student/exams', label: 'Exams', icon: FiHelpCircle },
-  { to: '/student/profile', label: 'Profile', icon: FiUser },
+  { to: '/student', label: 'لوحة التحكم', icon: RiDashboardLine },
+  { to: '/student/courses', label: 'كورساتي', icon: FiBookOpen },
+  { to: '/student/assignments', label: 'الواجبات', icon: FiFileText },
+  { to: '/student/exams', label: 'الاختبارات', icon: FiHelpCircle },
+  { to: '/student/profile', label: 'الملف الشخصي', icon: FiUser },
 ];
 
 interface Props {
@@ -47,16 +46,13 @@ export default function StudentSidebar({ profile, open, onClose, onToggle }: Pro
   return (
     <>
       {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-60 bg-white/80 backdrop-blur-xl border-b border-[#1A1A1A]/5 h-14 flex items-center justify-between px-4">
+      <div className="lg:hidden fixed top-0 right-0 left-0 z-60 bg-white/80 backdrop-blur-xl border-b border-[#1A1A1A]/5 h-14 flex items-center justify-between px-4">
         <span onClick={() => navigate('/')} className="text-lg font-black text-[#DE0002] tracking-tighter cursor-pointer">
-          Acad Flow <span className="text-[#1A1A1A]">Klub</span>
+          Acad Flow <span className="text-[#1A1A1A]">طالب</span>
         </span>
-        <div className="flex items-center gap-2">
-          <LanguageSwitcher variant="light" />
-          <button onClick={onToggle} className="w-9 h-9 flex items-center justify-center bg-[#F5F5F0] rounded-xl border border-[#1A1A1A]/10">
-            {open ? <FiX className="w-5 h-5 text-[#DE0002]" /> : <FiMenu className="w-5 h-5 text-[#1A1A1A]" />}
-          </button>
-        </div>
+        <button onClick={onToggle} className="w-9 h-9 flex items-center justify-center bg-[#F5F5F0] rounded-xl border border-[#1A1A1A]/10">
+          {open ? <FiX className="w-5 h-5 text-[#DE0002]" /> : <FiMenu className="w-5 h-5 text-[#1A1A1A]" />}
+        </button>
       </div>
 
       {/* Overlay */}
@@ -70,14 +66,14 @@ export default function StudentSidebar({ profile, open, onClose, onToggle }: Pro
         )}
       </AnimatePresence>
 
-      {/* Sidebar */}
-      <aside className={`h-screen w-72 lg:w-80 fixed left-0 top-0 bg-white flex flex-col py-8 lg:py-12 border-r border-[#1A1A1A]/5 shadow-2xl z-80 transition-transform duration-300 ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+      {/* Sidebar — pinned to RIGHT for RTL */}
+      <aside className={`h-screen w-72 lg:w-80 fixed right-0 top-0 bg-white flex flex-col py-8 lg:py-12 border-l border-[#1A1A1A]/5 shadow-2xl z-80 transition-transform duration-300 ${open ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}`}>
         {/* Logo */}
         <div className="px-8 lg:px-12 mb-8 lg:mb-12">
           <span onClick={() => navigate('/')} className="text-2xl lg:text-3xl font-black text-[#DE0002] tracking-tighter cursor-pointer block leading-none hover:opacity-80 transition-opacity">
-            Acad Flow<br /><span className="text-[#1A1A1A]">Klub</span>
+            Acad Flow<br /><span className="text-[#1A1A1A]">طالب</span>
           </span>
-          <p className="text-[10px] font-black uppercase tracking-[0.5em] text-[#D4A373] mt-3 italic">Student Portal</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.5em] text-[#D4A373] mt-3 italic">بوابة الطالب</p>
         </div>
 
         {/* Profile Card */}
@@ -91,9 +87,9 @@ export default function StudentSidebar({ profile, open, onClose, onToggle }: Pro
               )}
             </div>
             <div className="min-w-0">
-              <p className="font-black text-[#1A1A1A] text-sm truncate">{profile?.name || 'Loading…'}</p>
+              <p className="font-black text-[#1A1A1A] text-sm truncate">{profile?.name || 'جار التحميل…'}</p>
               <p className="text-[10px] font-black uppercase tracking-widest text-[#D4A373] mt-0.5 italic">
-                {profile?.current_level ?? '—'} Level
+                المستوى {profile?.current_level ?? '—'}
               </p>
             </div>
           </div>
@@ -125,18 +121,10 @@ export default function StudentSidebar({ profile, open, onClose, onToggle }: Pro
               className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-[#DE0002] text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:shadow-2xl hover:shadow-[#DE0002]/20 transition-all border border-[#DE0002]/20"
             >
               <FiDownload className="w-4 h-4" />
-              <span>Install App</span>
+              <span>تثبيت التطبيق</span>
             </button>
           </div>
         )}
-
-        {/* Language Switcher */}
-        <div className="px-6 lg:px-8 mb-4">
-          <div className="flex items-center justify-between p-3 bg-[#F5F5F0] rounded-2xl border border-[#1A1A1A]/5">
-            <span className="text-[10px] font-black uppercase tracking-wider text-[#1A1A1A]/60">اللغة / Language</span>
-            <LanguageSwitcher variant="light" />
-          </div>
-        </div>
 
         {/* Logout */}
         <div className="px-6 lg:px-8 pt-4 border-t border-[#1A1A1A]/5">
@@ -144,8 +132,8 @@ export default function StudentSidebar({ profile, open, onClose, onToggle }: Pro
             onClick={handleLogout}
             className="w-full flex items-center gap-4 px-6 py-4 text-[#1A1A1A]/30 hover:text-[#DE0002] font-black text-[11px] uppercase tracking-[0.3em] transition-all group active:scale-95"
           >
-            <FiLogOut className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-            <span>Logout Portal</span>
+            <FiLogOut className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <span>تسجيل الخروج</span>
           </button>
         </div>
       </aside>

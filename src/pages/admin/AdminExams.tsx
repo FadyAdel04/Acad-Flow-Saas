@@ -413,7 +413,7 @@ export default function AdminExams() {
   return (
     <motion.div initial={hasAnimated ? false : "hidden"} animate="visible" variants={cv} className="min-h-screen bg-[#F5F5F0] lg:flex">
       <AdminSidebar />
-      <main className="pt-14 lg:pt-0 lg:ml-80 flex-1 p-4 sm:p-6 md:p-10 lg:p-16 xl:p-20 relative overflow-hidden">
+      <main className="pt-14 lg:pt-0 lg:mr-80 flex-1 p-4 sm:p-6 md:p-10 lg:p-16 xl:p-20 relative overflow-hidden">
         <motion.header variants={ci} initial={hasAnimated ? false : "hidden"} animate="visible" className="mb-10 flex flex-col gap-6 relative z-10">
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 w-full">
             <div>

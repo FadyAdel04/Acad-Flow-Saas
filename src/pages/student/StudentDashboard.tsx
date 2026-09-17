@@ -107,7 +107,7 @@ export default function StudentDashboard() {
         onToggle={() => setSidebarOpen(p => !p)}
       />
 
-      <main className="pt-14 lg:pt-0 lg:ml-80 flex-1 p-4 sm:p-6 md:p-10 lg:p-16 xl:p-20 relative overflow-hidden">
+      <main className="pt-14 lg:pt-0 lg:mr-80 flex-1 p-4 sm:p-6 md:p-10 lg:p-16 xl:p-20 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[#D4A373]/2 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2" />
 
         {/* Error */}
@@ -121,30 +121,30 @@ export default function StudentDashboard() {
             {loading
               ? <div className="h-14 w-64 bg-[#1A1A1A]/5 rounded-2xl animate-pulse" />
               : <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-[#1A1A1A] leading-none uppercase">
-                  Guten Tag,<br /><span className="text-[#DE0002]">{greekName}.</span>
+                  أهلاً،<br /><span className="text-[#DE0002]">{greekName}.</span>
                 </h2>
             }
             <div className="flex flex-wrap items-center gap-2 pt-1">
               {profile?.current_level ? (
                 <span className="bg-[#1A1A1A] text-white px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border border-white/10">
-                  {profile.current_level} Level
+                  المستوى {profile.current_level}
                 </span>
               ) : (
                 <span className="bg-[#1A1A1A]/10 text-[#1A1A1A]/40 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest">
-                  No Level Assigned
+                  لم يُعيَّن مستوى
                 </span>
               )}
               {(profile as any)?.group?.name && (
                 <span className="bg-white text-[#1A1A1A] px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border border-[#1A1A1A]/5 shadow-sm">
-                  Group {(profile as any).group.name}
+                  مجموعة {(profile as any).group.name}
                 </span>
               )}
               <span className="bg-[#DE0002]/10 text-[#DE0002] px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border border-[#DE0002]/20 shadow-sm shadow-[#DE0002]/5">
-                {(profile as any)?.instructor?.name ? `With ${(profile as any).instructor.name}` : 'No Instructor Assigned'}
+                {(profile as any)?.instructor?.name ? `مع ${(profile as any).instructor.name}` : 'لم يُعيَّن مدرب'}
               </span>
               <span className="bg-red-50 text-[#DE0002] px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border border-red-100 flex items-center gap-2">
                 <FiCalendar className="w-3 h-3" />
-                {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                {new Date().toLocaleDateString('ar-EG', { day: 'numeric', month: 'long', year: 'numeric' })}
               </span>
             </div>
           </motion.div>
@@ -156,8 +156,8 @@ export default function StudentDashboard() {
                 <RiFlashlightLine className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div className="pr-2">
-                <p className="text-lg sm:text-xl font-black text-[#1A1A1A]">{results.length} Exams</p>
-                <p className="text-[9px] text-[#D4A373] uppercase tracking-widest font-black">Completed</p>
+                <p className="text-lg sm:text-xl font-black text-[#1A1A1A]">{results.length} اختبار</p>
+                <p className="text-[9px] text-[#D4A373] uppercase tracking-widest font-black">مكتمل</p>
               </div>
             </div>
           </motion.div>
@@ -173,7 +173,7 @@ export default function StudentDashboard() {
               <div className="space-y-6">
                 <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
                   <div className="space-y-3">
-                    <span className="text-[#D4A373] text-[10px] font-black uppercase tracking-[0.4em]">Current Enrollment</span>
+                    <span className="text-[#D4A373] text-[10px] font-black uppercase tracking-[0.4em]">التسجيل الحالي</span>
                     {loading
                       ? <div className="h-12 w-72 bg-white/10 rounded-xl animate-pulse" />
                       : <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tighter uppercase leading-none">
@@ -190,10 +190,10 @@ export default function StudentDashboard() {
                 </div>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-white/5">
                   {[
-                    { icon: FiClock, label: 'Materials', val: loading ? '—' : String(materials.length) },
-                    { icon: FiBookOpen, label: 'Tasks',  val: loading ? '—' : String(assignments.length) },
-                    { icon: FiAward, label: 'Exams',     val: loading ? '—' : String(exams.length) },
-                    { icon: FiCalendar, label: 'Session', val: loading ? '—' : new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) },
+                    { icon: FiClock, label: 'المواد', val: loading ? '—' : String(materials.length) },
+                    { icon: FiBookOpen, label: 'الواجبات',  val: loading ? '—' : String(assignments.length) },
+                    { icon: FiAward, label: 'الاختبارات',     val: loading ? '—' : String(exams.length) },
+                    { icon: FiCalendar, label: 'الجلسة', val: loading ? '—' : new Date().toLocaleDateString('ar-EG', { day: 'numeric', month: 'short' }) },
                   ].map((s, i) => (
                     <div key={i} className="space-y-2">
                       <s.icon className="w-4 h-4 text-[#D4A373]" />
@@ -212,18 +212,18 @@ export default function StudentDashboard() {
                             <FiActivity className="w-6 h-6" />
                          </div>
                          <div>
-                            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4A373] leading-none mb-1.5 italic">Consolidated Enrollment</p>
+                            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4A373] leading-none mb-1.5 italic">التسجيل الموحد</p>
                             <p className="text-lg font-black uppercase tracking-tighter text-white">
                                {profile?.current_level ?? '—'} Level
-                               {(profile as any)?.group?.name && ` • Group ${(profile as any).group.name}`}
+                               {(profile as any)?.group?.name && ` • مجموعة ${(profile as any).group.name}`}
                             </p>
                          </div>
                       </div>
                       
                       <div className="flex flex-col sm:items-end text-left sm:text-right">
-                         <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 leading-none mb-1.5 italic">Academic Lead</p>
+                         <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 leading-none mb-1.5 italic">المدرب</p>
                          <p className="text-sm font-black uppercase tracking-tight text-[#D4A373] italic">
-                            {(profile as any)?.instructor?.name ? `with ${(profile as any).instructor.name}` : 'No Instructor Assigned'}
+                            {(profile as any)?.instructor?.name ? `مع ${(profile as any).instructor.name}` : 'لم يُعيَّن مدرب'}
                          </p>
                       </div>
                    </div>
@@ -232,7 +232,7 @@ export default function StudentDashboard() {
                       <div className="flex items-center justify-between">
                          <div className="flex items-center gap-2 text-[10px] font-black text-white/40 uppercase tracking-widest italic">
                             <FiActivity className="w-3.5 h-3.5 text-[#D4A373]" />
-                            Level Progress
+                            تقدم المستوى
                          </div>
                          <p className="text-[10px] font-black text-[#D4A373] uppercase tracking-widest">
                            {progress ? `${progress.percentage}%` : '0%'} Completed
@@ -263,7 +263,7 @@ export default function StudentDashboard() {
                       </div>
 
                       <p className="text-[8px] font-black text-white/10 uppercase tracking-[0.4em] text-center pt-4">
-                        {progress?.completedItems ?? 0} / {progress?.totalItems ?? 0} total milestones
+                        {progress?.completedItems ?? 0} / {progress?.totalItems ?? 0} إجمالي الإنجازات
                       </p>
                    </div>
                    
@@ -271,10 +271,10 @@ export default function StudentDashboard() {
                       <div className="flex items-center justify-between">
                          <div className="flex items-center gap-2 text-[10px] font-black text-white/40 uppercase tracking-widest italic">
                             <FiCalendar className="w-3.5 h-3.5 text-[#D4A373]" />
-                            Attendance Tracking
+                            تتبع الحضور
                          </div>
                          <p className="text-[10px] font-black text-[#D4A373] uppercase tracking-widest">
-                           {attendance?.attendedSessions ?? 0} / 8 Attended
+                           {attendance?.attendedSessions ?? 0} / 8 حضور
                          </p>
                       </div>
                       <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
@@ -302,12 +302,12 @@ export default function StudentDashboard() {
                     onClick={() => navigate('/student/courses')}
                     className="bg-[#D4A373] text-white px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-wider hover:shadow-[0_20px_40px_rgba(198,40,40,0.4)] hover:-translate-y-1 transition-all active:scale-95 shadow-xl"
                   >
-                    View Materials
+                    عرض المواد
                   </button>
                   <p className="text-white/20 text-[10px] font-black uppercase tracking-widest italic">
                     {materialGroups
-                      ? `${materialGroups.all.length} material${materialGroups.all.length !== 1 ? 's' : ''} assigned`
-                      : materials[0]?.title ?? 'No materials yet'}
+                      ? `${materialGroups.all.length} مادة مخصصة`
+                      : materials[0]?.title ?? 'لا توجد مواد بعد'}
                   </p>
                 </div>
                 <FiChevronRight className="w-8 h-8 text-white/10 hidden sm:block" />
@@ -318,7 +318,7 @@ export default function StudentDashboard() {
           {/* Latest Result */}
           <motion.div variants={ci} className="col-span-1 md:col-span-12 lg:col-span-4 bg-white rounded-[2.5rem] p-8 sm:p-10 lg:p-12 border border-[#1A1A1A]/5 shadow-sm space-y-8 group hover:shadow-2xl transition-all">
             <div className="flex justify-between items-start">
-              <h4 className="text-lg font-black tracking-tight uppercase">Latest Result</h4>
+              <h4 className="text-lg font-black tracking-tight uppercase">آخر نتيجة</h4>
               <RiMedalLine className="w-7 h-7 text-[#D4A373] group-hover:scale-110 transition-transform" />
             </div>
             {loading
@@ -329,7 +329,7 @@ export default function StudentDashboard() {
                       {latestPendingReview ? (
                         <>
                           <p className="text-sm font-black text-amber-900 bg-amber-50 border border-amber-100 rounded-2xl px-4 py-3">
-                            Your latest exam is under review — final score will appear when writing sections are graded.
+                            اختبارك الأخير قيد المراجعة — ستظهر الدرجة النهائية بعد تصحيح أجزاء الكتابة.
                           </p>
                           <p className="text-xs font-black text-[#1A1A1A]/40 uppercase tracking-widest italic">
                             {latestResult.exams?.title ?? 'Exam'}

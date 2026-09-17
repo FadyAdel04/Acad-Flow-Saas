@@ -125,7 +125,7 @@ export default function AdminCalendar() {
     <motion.div initial="hidden" animate="visible" variants={cv} className="min-h-screen bg-[#F5F5F0] lg:flex">
       <AdminSidebar />
 
-      <main className="pt-14 lg:pt-0 lg:ml-80 flex-1 p-4 sm:p-6 md:p-10 lg:p-16 xl:p-20 relative overflow-hidden">
+      <main className="pt-14 lg:pt-0 lg:mr-80 flex-1 p-4 sm:p-6 md:p-10 lg:p-16 xl:p-20 relative overflow-hidden">
         {/* Header */}
         <motion.header variants={ci} className="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 relative z-10">
            <div className="space-y-4">

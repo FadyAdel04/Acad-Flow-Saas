@@ -131,7 +131,7 @@ export default function AdminExamReviewPage() {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-[#F5F5F0] lg:flex pb-28">
       <AdminSidebar />
 
-      <main className="pt-14 lg:pt-0 lg:ml-80 flex-1 p-4 sm:p-8 max-w-4xl mx-auto w-full">
+      <main className="pt-14 lg:pt-0 lg:mr-80 flex-1 p-4 sm:p-8 max-w-4xl mx-auto w-full">
         <button
           type="button"
           onClick={() => navigate('/admin/exams')}

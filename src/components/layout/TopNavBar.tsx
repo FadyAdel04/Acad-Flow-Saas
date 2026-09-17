@@ -7,7 +7,6 @@ import { useAuth } from '../../context/AuthContext';
 import { supabase } from '../../lib/supabase';
 import ToastStack from '../shared/ToastStack';
 import { usePWAInstall } from '../../hooks/usePWAInstall';
-import LanguageSwitcher from '../shared/LanguageSwitcher';
 
 export default function TopNavBar() {
   const navigate = useNavigate();
@@ -152,7 +151,6 @@ export default function TopNavBar() {
                 تثبيت التطبيق
               </button>
             )}
-            <LanguageSwitcher />
             {isSignedIn ? (
               <button
                 onClick={() => navigate(portalPath)}
@@ -248,10 +246,6 @@ export default function TopNavBar() {
                   )}
                 </motion.button>
               ))}
-            </div>
-
-            <div className="w-full pt-4 flex justify-center">
-              <LanguageSwitcher />
             </div>
 
             <div className="w-full pt-6 mt-4 border-t border-[#1A1A1A]/10 space-y-3">

@@ -4,19 +4,18 @@ import { useState, useEffect } from 'react';
 import { FiUsers, FiFileText, FiAward, FiLogOut, FiX, FiMenu, FiGrid } from 'react-icons/fi';
 import { RiDashboardLine } from 'react-icons/ri';
 import { useAuth } from '../../context/AuthContext';
-import LanguageSwitcher from './LanguageSwitcher';
 
 const navLinks = [
-  { to: '/instructor', label: 'Dashboard', icon: RiDashboardLine, exact: true },
-  { to: '/instructor/levels', label: 'Levels', icon: FiGrid },
-  { to: '/instructor/students', label: 'Students', icon: FiUsers },
-  { to: '/instructor/assignments', label: 'Level Assignments', icon: FiFileText },
-  { to: '/instructor/exams', label: 'Level Exams', icon: FiAward },
-  { to: '/instructor/profile', label: 'Profile', icon: FiUsers },
+  { to: '/instructor', label: 'لوحة التحكم', icon: RiDashboardLine, exact: true },
+  { to: '/instructor/levels', label: 'المستويات', icon: FiGrid },
+  { to: '/instructor/students', label: 'الطلاب', icon: FiUsers },
+  { to: '/instructor/assignments', label: 'واجبات المستوى', icon: FiFileText },
+  { to: '/instructor/exams', label: 'اختبارات المستوى', icon: FiAward },
+  { to: '/instructor/profile', label: 'الملف الشخصي', icon: FiUsers },
 ];
 
 function getInitials(name: string) {
-  return name.split(' ').slice(0, 2).map(p => p[0]?.toUpperCase() ?? '').join('') || 'IN';
+  return name.split(' ').slice(0, 2).map(p => p[0]?.toUpperCase() ?? '').join('') || 'مد';
 }
 
 export default function InstructorSidebar() {
@@ -25,7 +24,7 @@ export default function InstructorSidebar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
 
-  const instructorName = user?.name || 'Instructor';
+  const instructorName = user?.name || 'المدرب';
   const avatarUrl = user?.avatar_url;
 
   useEffect(() => {
@@ -41,16 +40,13 @@ export default function InstructorSidebar() {
   return (
     <>
       {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-60 bg-[#1A1A1A] border-b border-white/5 h-14 flex items-center justify-between px-4">
+      <div className="lg:hidden fixed top-0 right-0 left-0 z-60 bg-[#1A1A1A] border-b border-white/5 h-14 flex items-center justify-between px-4">
         <span onClick={() => navigate('/')} className="text-lg font-black text-white tracking-tighter cursor-pointer">
-          Acad Flow <span className="text-[#D4A373]">Instructor</span>
+          Acad Flow <span className="text-[#D4A373]">مدرب</span>
         </span>
-        <div className="flex items-center gap-2">
-          <LanguageSwitcher variant="dark" />
-          <button onClick={() => setOpen(p => !p)} className="w-9 h-9 flex items-center justify-center bg-white/10 rounded-xl border border-white/10">
-            {open ? <FiX className="w-5 h-5 text-[#F97316]" /> : <FiMenu className="w-5 h-5 text-white" />}
-          </button>
-        </div>
+        <button onClick={() => setOpen(p => !p)} className="w-9 h-9 flex items-center justify-center bg-white/10 rounded-xl border border-white/10">
+          {open ? <FiX className="w-5 h-5 text-[#F97316]" /> : <FiMenu className="w-5 h-5 text-white" />}
+        </button>
       </div>
 
       {/* Overlay */}
@@ -64,17 +60,17 @@ export default function InstructorSidebar() {
         )}
       </AnimatePresence>
 
-      {/* Sidebar */}
-      <aside className={`h-screen w-72 lg:w-80 fixed left-0 top-0 bg-[#1A1A1A] flex flex-col py-8 lg:py-12 border-r border-white/5 shadow-2xl z-80 overflow-hidden transition-transform duration-300 ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+      {/* Sidebar — pinned to RIGHT for RTL */}
+      <aside className={`h-screen w-72 lg:w-80 fixed right-0 top-0 bg-[#1A1A1A] flex flex-col py-8 lg:py-12 border-l border-white/5 shadow-2xl z-80 overflow-hidden transition-transform duration-300 ${open ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}`}>
         <div className="absolute top-0 left-0 w-full h-1 bg-[#DE0002]" />
-        <div className="absolute bottom-0 right-0 w-48 h-48 bg-[#DE0002]/5 rounded-full blur-[80px] translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#DE0002]/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
 
         {/* Logo */}
         <div className="px-8 lg:px-12 mb-8 lg:mb-12 relative z-10">
           <span onClick={() => navigate('/')} className="text-2xl lg:text-3xl font-black text-white tracking-tighter block leading-none cursor-pointer hover:opacity-80 transition-opacity">
-            Acad Flow<br /><span className="text-[#D4A373]">Instructor.</span>
+            Acad Flow<br /><span className="text-[#D4A373]">مدرب.</span>
           </span>
-          <p className="text-[10px] font-black uppercase tracking-[0.5em] text-[#D4A373] mt-3">Pedagogical Portal</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.5em] text-[#D4A373] mt-3">بوابة المدرب</p>
         </div>
 
         {/* Instructor Profile Card */}
@@ -89,7 +85,7 @@ export default function InstructorSidebar() {
             </div>
             <div className="min-w-0">
               <p className="font-black text-white text-sm truncate capitalize">{instructorName}</p>
-              <p className="text-[10px] font-black uppercase tracking-widest text-[#D4A373] mt-0.5 italic">Instructor</p>
+              <p className="text-[10px] font-black uppercase tracking-widest text-[#D4A373] mt-0.5 italic">مدرب</p>
             </div>
           </div>
         </div>
@@ -112,22 +108,14 @@ export default function InstructorSidebar() {
           ))}
         </nav>
 
-        {/* Language Switcher */}
-        <div className="px-6 lg:px-8 mb-4 relative z-10">
-          <div className="flex items-center justify-between p-3 bg-white/5 rounded-2xl border border-white/10">
-            <span className="text-[10px] font-black uppercase tracking-wider text-white/50">اللغة / Language</span>
-            <LanguageSwitcher variant="dark" />
-          </div>
-        </div>
-
         {/* Logout */}
         <div className="px-6 lg:px-8 pt-4 border-t border-white/5 relative z-10">
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-4 px-6 py-4 text-white/20 hover:text-[#DE0002] font-black text-[11px] uppercase tracking-[0.3em] transition-all group active:scale-95"
           >
-            <FiLogOut className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-            <span>Portal Exit</span>
+            <FiLogOut className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <span>تسجيل الخروج</span>
           </button>
         </div>
       </aside>

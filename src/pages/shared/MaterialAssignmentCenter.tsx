@@ -302,7 +302,7 @@ export default function MaterialAssignmentCenter({ portal }: Props) {
 
       <main
         className={`flex-1 p-4 sm:p-6 md:p-10 lg:p-14 relative overflow-hidden ${
-          portal === 'admin' ? 'lg:ml-80 pt-14 lg:pt-0' : 'pt-20 lg:pt-0 lg:ml-80'
+          portal === 'admin' ? 'lg:mr-80 pt-14 lg:pt-0' : 'pt-20 lg:pt-0 lg:mr-80'
         }`}
       >
         <motion.header variants={ci} className="mb-8 relative z-10">

@@ -81,7 +81,7 @@ export default function SecretaryLevels() {
     <motion.div initial="hidden" animate="visible" variants={cv} className="min-h-screen bg-[#F5F5F0] lg:flex uppercase">
       <SecretarySidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} onToggle={() => setSidebarOpen(p => !p)} />
 
-      <main className="pt-14 lg:pt-0 lg:ml-80 flex-1 p-4 sm:p-6 md:p-10 lg:p-16 xl:p-20 relative overflow-hidden">
+      <main className="pt-14 lg:pt-0 lg:mr-80 flex-1 p-4 sm:p-6 md:p-10 lg:p-16 xl:p-20 relative overflow-hidden">
         <motion.header variants={ci} className="mb-12 flex flex-col xl:flex-row justify-between items-start xl:items-end gap-6 relative z-10">
            <div className="space-y-4">
               <h2 className="text-4xl sm:text-6xl font-black tracking-tighter text-[#1A1A1A] leading-none">

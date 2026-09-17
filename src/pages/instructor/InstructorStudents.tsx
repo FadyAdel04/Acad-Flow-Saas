@@ -53,7 +53,7 @@ export default function InstructorStudents() {
   });
 
   return (
-    <motion.div initial="hidden" animate="visible" variants={cv} className="min-h-screen bg-[#F5F5F0] lg:ml-80 p-6 md:p-10 lg:p-16 xl:p-20 relative overflow-hidden">
+    <motion.div initial="hidden" animate="visible" variants={cv} className="min-h-screen bg-[#F5F5F0] lg:mr-80 p-6 md:p-10 lg:p-16 xl:p-20 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[#D4A373]/[0.02] rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2" />
 
       <motion.header variants={ci} className="mb-14 relative z-10">

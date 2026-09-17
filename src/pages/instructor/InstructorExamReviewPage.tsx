@@ -131,7 +131,7 @@ export default function InstructorExamReviewPage() {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-[#F5F5F0] lg:flex pb-28">
       <InstructorSidebar />
 
-      <main className="pt-14 lg:pt-0 lg:ml-80 flex-1 p-4 sm:p-8 max-w-4xl mx-auto w-full relative z-10">
+      <main className="pt-14 lg:pt-0 lg:mr-80 flex-1 p-4 sm:p-8 max-w-4xl mx-auto w-full relative z-10">
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[#F97316]/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/2" />
         
         <button

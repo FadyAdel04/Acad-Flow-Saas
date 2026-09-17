@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { FiUsers, FiFileText, FiAward, FiTrendingUp, FiArrowRight, FiAlertCircle } from 'react-icons/fi';
+import { FiUsers, FiFileText, FiAward, FiTrendingUp, FiArrowLeft, FiAlertCircle } from 'react-icons/fi';
 import { RiAdminLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import AdminSidebar from '../../components/shared/AdminSidebar';
@@ -29,7 +29,7 @@ export default function AdminDashboard() {
         setAllStudents(students);
         setLevels(lvls);
       } catch (e: unknown) {
-        if (!cancelled) setError(e instanceof Error ? e.message : 'Failed to load');
+        if (!cancelled) setError(e instanceof Error ? e.message : 'فشل تحميل البيانات');
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -44,10 +44,10 @@ export default function AdminDashboard() {
   }));
 
   const kpis = [
-    { label: 'Total Students',  val: loading ? '—' : stats.students,    icon: FiUsers,    trend: 'Active' },
-    { label: 'Instructors',      val: loading ? '—' : stats.instructors, icon: RiAdminLine, trend: 'Staff' },
-    { label: 'Assignments',      val: loading ? '—' : stats.assignments, icon: FiFileText, trend: 'Created' },
-    { label: 'Exams',            val: loading ? '—' : stats.exams,       icon: FiAward,    trend: 'Available' },
+    { label: 'إجمالي الطلاب',  val: loading ? '—' : stats.students,    icon: FiUsers,    trend: 'نشط' },
+    { label: 'المدربون',         val: loading ? '—' : stats.instructors, icon: RiAdminLine, trend: 'كادر' },
+    { label: 'الواجبات',         val: loading ? '—' : stats.assignments, icon: FiFileText, trend: 'منشور' },
+    { label: 'الاختبارات',       val: loading ? '—' : stats.exams,       icon: FiAward,    trend: 'متاح' },
   ];
 
   function getInitials(name: string) {
@@ -58,17 +58,17 @@ export default function AdminDashboard() {
     <motion.div initial="hidden" animate="visible" variants={cv} className="min-h-screen bg-[#F5F5F0] lg:flex">
       <AdminSidebar />
 
-      <main className="pt-14 lg:pt-0 lg:ml-80 flex-1 p-4 sm:p-6 md:p-10 lg:p-16 xl:p-20 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[#F97316]/2 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2" />
+      <main className="pt-14 lg:pt-0 lg:mr-80 flex-1 p-4 sm:p-6 md:p-10 lg:p-16 xl:p-20 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-[50vw] h-[50vw] bg-[#F97316]/2 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 -translate-x-1/2" />
 
         {/* Header */}
         <motion.header variants={ci} className="mb-10 lg:mb-14 relative z-10">
           <div className="flex items-center gap-3 text-[#F97316] text-[10px] font-black uppercase tracking-[0.5em] mb-3">
             <RiAdminLine className="w-4 h-4" />
-            <span>Admin Access</span>
+            <span>صلاحيات المدير</span>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-[#1A1A1A] leading-none uppercase">
-            Control<br /><span className="text-[#F97316]">Panel.</span>
+            لوحة<br /><span className="text-[#F97316]">التحكم.</span>
           </h1>
         </motion.header>
 
@@ -105,19 +105,19 @@ export default function AdminDashboard() {
                   <FiUsers className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-black text-[#1A1A1A] tracking-tighter uppercase">Recent Students</h3>
-                  <p className="text-[9px] font-black text-[#1A1A1A]/30 uppercase tracking-widest">{stats.students} Total</p>
+                  <h3 className="font-black text-[#1A1A1A] tracking-tighter uppercase">آخر الطلاب</h3>
+                  <p className="text-[9px] font-black text-[#1A1A1A]/30 uppercase tracking-widest">{stats.students} إجمالاً</p>
                 </div>
               </div>
               <button onClick={() => navigate('/admin/students')} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#F97316] hover:underline group">
-                View All <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                عرض الكل <FiArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               </button>
             </div>
 
             {loading
               ? <div className="p-8 space-y-4">{[1,2,3,4,5].map(i => <div key={i} className="h-14 bg-[#F5F5F0] rounded-2xl animate-pulse" />)}</div>
               : recent.length === 0
-                ? <div className="p-16 text-center"><p className="font-black text-[#1A1A1A]/20 uppercase">No students yet.</p></div>
+                ? <div className="p-16 text-center"><p className="font-black text-[#1A1A1A]/20 uppercase">لا يوجد طلاب بعد.</p></div>
                 : <div className="divide-y divide-[#1A1A1A]/5">
                     {recent.map(s => (
                       <div key={s.id} className="flex items-center gap-5 px-8 py-5 hover:bg-[#F5F5F0]/50 transition-all group">
@@ -129,7 +129,7 @@ export default function AdminDashboard() {
                           <p className="text-[10px] font-black text-[#1A1A1A]/30 uppercase tracking-widest truncate">{s.email}</p>
                         </div>
                         <span className="text-[9px] font-black uppercase px-3 py-1.5 rounded-full bg-[#F97316]/5 text-[#F97316] shrink-0">
-                          Level {s.current_level}
+                          المستوى {s.current_level}
                         </span>
                       </div>
                     ))}
@@ -143,9 +143,9 @@ export default function AdminDashboard() {
             <div className="relative z-10 mb-8">
               <div className="flex items-center gap-3 mb-2">
                 <FiTrendingUp className="w-5 h-5 text-[#F97316]" />
-                <h3 className="font-black text-white tracking-tighter uppercase">Level Distribution</h3>
+                <h3 className="font-black text-white tracking-tighter uppercase">توزيع المستويات</h3>
               </div>
-              <p className="text-[9px] font-black text-white/30 uppercase tracking-widest">{stats.students} Students Total</p>
+              <p className="text-[9px] font-black text-white/30 uppercase tracking-widest">{stats.students} طالب إجمالاً</p>
             </div>
             <div className="relative z-10 space-y-5">
               {levels.map(l => {
@@ -155,7 +155,7 @@ export default function AdminDashboard() {
                 return (
                   <div key={lv}>
                     <div className="flex justify-between mb-2">
-                      <span className="text-xs font-black uppercase tracking-widest text-white/60">Level {lv}</span>
+                      <span className="text-xs font-black uppercase tracking-widest text-white/60">المستوى {lv}</span>
                       <span className="text-xs font-black text-[#D4A373]">{loading ? '—' : count}</span>
                     </div>
                     <div className="h-2 bg-white/10 rounded-full overflow-hidden">
@@ -174,12 +174,12 @@ export default function AdminDashboard() {
             {/* Quick links */}
             <div className="relative z-10 mt-10 pt-8 border-t border-white/5 grid grid-cols-2 gap-3">
               {[
-                { label: 'Materials',   to: '/admin/materials' },
-                { label: 'Assignments', to: '/admin/assignments' },
-                { label: 'Exams',       to: '/admin/exams' },
-                { label: 'Students',    to: '/admin/students' },
-                { label: 'Attendance',  to: '/admin/attendance' },
-                { label: 'Calendar',    to: '/admin/calendar' },
+                { label: 'المواد',       to: '/admin/materials' },
+                { label: 'الواجبات',     to: '/admin/assignments' },
+                { label: 'الاختبارات',   to: '/admin/exams' },
+                { label: 'الطلاب',       to: '/admin/students' },
+                { label: 'الحضور',       to: '/admin/attendance' },
+                { label: 'التقويم',      to: '/admin/calendar' },
               ].map(link => (
                 <button
                   key={link.to}
@@ -194,12 +194,12 @@ export default function AdminDashboard() {
 
           {/* Avg Score */}
           <motion.div variants={ci} className="col-span-1 lg:col-span-4 bg-[#F97316] rounded-[2.5rem] p-8 lg:p-10 text-white shadow-2xl relative overflow-hidden group hover:-translate-y-1 transition-all">
-            <div className="absolute -right-6 -bottom-6 opacity-10 group-hover:rotate-12 group-hover:opacity-20 transition-all duration-700">
+            <div className="absolute -left-6 -bottom-6 opacity-10 group-hover:rotate-12 group-hover:opacity-20 transition-all duration-700">
               <FiAward className="text-[120px]" />
             </div>
-            <p className="text-[9px] font-black uppercase tracking-[0.5em] mb-3 italic relative z-10">Avg Exam Score</p>
+            <p className="text-[9px] font-black uppercase tracking-[0.5em] mb-3 italic relative z-10">متوسط درجات الاختبار</p>
             <p className="text-6xl font-black tracking-tighter relative z-10">{loading ? '—' : `${stats.avgScore}%`}</p>
-            <p className="text-[9px] font-black uppercase tracking-widest text-white/60 mt-3 relative z-10">Across all graded submissions</p>
+            <p className="text-[9px] font-black uppercase tracking-widest text-white/60 mt-3 relative z-10">عبر جميع الاختبارات المصححة</p>
           </motion.div>
         </div>
       </main>

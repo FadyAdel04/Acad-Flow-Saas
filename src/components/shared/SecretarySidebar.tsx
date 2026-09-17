@@ -2,10 +2,9 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FiGrid, FiLayers, FiCheckSquare, FiLogOut, FiUsers,
-  FiBriefcase, FiX, FiMenu, FiChevronRight, FiHome, FiUserPlus
+  FiBriefcase, FiX, FiMenu, FiChevronLeft, FiHome, FiUserPlus
 } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
-import LanguageSwitcher from './LanguageSwitcher';
 
 interface SecretarySidebarProps {
   open: boolean;
@@ -19,13 +18,13 @@ export default function SecretarySidebar({ open, onClose, onToggle }: SecretaryS
   const { user, logout } = useAuth();
 
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: FiHome, path: '/secretary' },
-    { id: 'attendance', label: 'Attendance', icon: FiCheckSquare, path: '/secretary/attendance' },
-    { id: 'students', label: 'Students', icon: FiUsers, path: '/secretary/students' },
-    { id: 'enrollment', label: 'Enrollment', icon: FiUserPlus, path: '/secretary/enrollment' },
-    { id: 'assign_materials', label: 'Assign Materials', icon: FiBriefcase, path: '/secretary/material-assignments' },
-    { id: 'levels', label: 'Levels', icon: FiLayers, path: '/secretary/levels' },
-    { id: 'groups', label: 'Groups', icon: FiGrid, path: '/secretary/groups' },
+    { id: 'dashboard', label: 'لوحة التحكم', icon: FiHome, path: '/secretary' },
+    { id: 'attendance', label: 'الحضور والغياب', icon: FiCheckSquare, path: '/secretary/attendance' },
+    { id: 'students', label: 'الطلاب', icon: FiUsers, path: '/secretary/students' },
+    { id: 'enrollment', label: 'تسجيل الطلاب', icon: FiUserPlus, path: '/secretary/enrollment' },
+    { id: 'assign_materials', label: 'تعيين المواد', icon: FiBriefcase, path: '/secretary/material-assignments' },
+    { id: 'levels', label: 'المستويات', icon: FiLayers, path: '/secretary/levels' },
+    { id: 'groups', label: 'المجموعات', icon: FiGrid, path: '/secretary/groups' },
   ];
 
   const handleLogout = async () => {
@@ -35,15 +34,13 @@ export default function SecretarySidebar({ open, onClose, onToggle }: SecretaryS
 
   return (
     <>
-
-      <div className="lg:hidden fixed top-4 left-4 z-[60] flex items-center gap-2">
+      <div className="lg:hidden fixed top-4 right-4 z-[60] flex items-center gap-2">
         <button
           onClick={onToggle}
           className="p-3 bg-white rounded-2xl shadow-xl border border-[#1A1A1A]/5 text-[#1A1A1A]"
         >
           {open ? <FiX className="w-5 h-5" /> : <FiMenu className="w-5 h-5" />}
         </button>
-        <LanguageSwitcher variant="light" />
       </div>
 
       <AnimatePresence>
@@ -59,19 +56,19 @@ export default function SecretarySidebar({ open, onClose, onToggle }: SecretaryS
       </AnimatePresence>
 
       <aside
-        className={`fixed top-0 left-0 bottom-0 w-80 bg-white border-r border-[#1A1A1A]/5 z-[55] flex flex-col items-stretch overflow-hidden transition-transform duration-300 ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
+        className={`fixed top-0 right-0 bottom-0 w-80 bg-white border-l border-[#1A1A1A]/5 z-[55] flex flex-col items-stretch overflow-hidden transition-transform duration-300 ${open ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}`}
       >
         <div className="p-10 pb-6">
           <button
             onClick={() => { navigate('/'); onClose(); }}
-            className="flex items-center gap-4 mb-2 text-left w-full hover:opacity-80 transition-opacity cursor-pointer focus:outline-none"
+            className="flex items-center gap-4 mb-2 text-right w-full hover:opacity-80 transition-opacity cursor-pointer focus:outline-none"
           >
             <div className="w-12 h-12 bg-[#F97316] rounded-2xl flex items-center justify-center text-white shadow-xl shadow-[#F97316]/20 shrink-0">
               <FiBriefcase className="w-6 h-6" />
             </div>
             <div className="flex-1 min-w-0">
               <h1 className="text-xl font-black text-[#1A1A1A] tracking-tighter uppercase leading-none truncate">Acad Flow</h1>
-              <p className="text-[9px] font-black uppercase tracking-[0.4em] text-[#D4A373] mt-1.5 italic">Secretary Portal</p>
+              <p className="text-[9px] font-black uppercase tracking-[0.4em] text-[#D4A373] mt-1.5 italic">بوابة السكرتيرة</p>
             </div>
           </button>
         </div>
@@ -90,7 +87,7 @@ export default function SecretarySidebar({ open, onClose, onToggle }: SecretaryS
                   <item.icon className={`w-5 h-5 transition-colors ${active ? 'text-[#F97316]' : 'group-hover:text-[#F97316]'}`} />
                   <span className="font-black text-[13px] uppercase tracking-widest">{item.label}</span>
                 </div>
-                <FiChevronRight className={`w-4 h-4 transition-all ${active ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-3 group-hover:opacity-40'}`} />
+                <FiChevronLeft className={`w-4 h-4 transition-all ${active ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-3 group-hover:opacity-40'}`} />
               </button>
             );
           })}
@@ -102,19 +99,13 @@ export default function SecretarySidebar({ open, onClose, onToggle }: SecretaryS
               {user?.avatar_url ? (
                 <img src={user.avatar_url} alt="" className="w-full h-full object-cover rounded-xl" />
               ) : (
-                <span className="text-sm font-black text-[#F97316]">{user?.name?.[0] || 'S'}</span>
+                <span className="text-sm font-black text-[#F97316]">{user?.name?.[0] || 'س'}</span>
               )}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-black text-xs text-[#1A1A1A] tracking-tight truncate uppercase italic">{user?.name || 'Secretary'}</p>
-              <p className="text-[9px] font-black uppercase tracking-widest text-[#D4A373] mt-0.5">Academic Lead</p>
+              <p className="font-black text-xs text-[#1A1A1A] tracking-tight truncate uppercase italic">{user?.name || 'السكرتيرة'}</p>
+              <p className="text-[9px] font-black uppercase tracking-widest text-[#D4A373] mt-0.5">مشرف أكاديمي</p>
             </div>
-          </div>
-
-          {/* Language Switcher */}
-          <div className="flex items-center justify-between p-3 bg-[#F5F5F0] rounded-2xl border border-[#1A1A1A]/5">
-            <span className="text-[10px] font-black uppercase tracking-wider text-[#1A1A1A]/60">اللغة / Language</span>
-            <LanguageSwitcher variant="light" />
           </div>
 
           <button
@@ -122,7 +113,7 @@ export default function SecretarySidebar({ open, onClose, onToggle }: SecretaryS
             className="w-full flex items-center justify-center gap-3 bg-[#DE0002]/5 hover:bg-[#DE0002] text-[#DE0002] hover:text-white p-4 rounded-2xl transition-all font-black text-[11px] uppercase tracking-widest border border-[#DE0002]/10"
           >
             <FiLogOut className="w-4 h-4" />
-            Sign Out
+            تسجيل الخروج
           </button>
         </div>
       </aside>

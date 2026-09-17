@@ -150,7 +150,7 @@ export default function SecretaryGroups() {
     <motion.div initial="hidden" animate="visible" variants={cv} className="min-h-screen bg-[#F5F5F0] lg:flex uppercase">
       <SecretarySidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} onToggle={() => setSidebarOpen(p => !p)} />
 
-      <main className="pt-24 sm:pt-28 lg:pt-10 lg:ml-80 flex-1 p-4 sm:p-6 md:p-10 lg:p-16 relative overflow-hidden">
+      <main className="pt-24 sm:pt-28 lg:pt-10 lg:mr-80 flex-1 p-4 sm:p-6 md:p-10 lg:p-16 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[#F97316]/[0.02] rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2" />
 
         {/* Header */}
